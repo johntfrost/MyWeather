@@ -15,12 +15,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     var weather: Weather!
     var manager: CLLocationManager!
+    var location: Location!
     
     
     var latitude:String = ""
     var longitude:String = ""
-    var lat:String = "35"
-    var lon:String = "-84"
     
     
     
@@ -28,11 +27,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        location = Location()
+        location.initLocation()
         
-        initLocation()
-         if manager.location != nil{
-            latitude = "\(manager.location!.coordinate.latitude)"
-            longitude = "\(manager.location!.coordinate.longitude)"
+        if location.manager.location != nil{
+            latitude = "\(location.manager.location!.coordinate.latitude)"
+            longitude = "\(location.manager.location!.coordinate.longitude)"
         }
        
         weather = Weather(latitude: latitude, longitude: longitude)
@@ -41,31 +41,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
     }
     
-    func initLocation() {
-        manager = CLLocationManager()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-    }
-    
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        //Captures user location from GPS in lat/long
-        let userLocation:CLLocation = locations[0]
-        self.latitude = "\(userLocation.coordinate.latitude)"
-        self.longitude = "\(userLocation.coordinate.longitude)"
-        
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        let alert = UIAlertController(title: "Failed to find user's location.", message: "Please try again later", preferredStyle: .Alert)
-        let action = (UIAlertAction(title: "OK", style: .Default) { _ in})
-        alert.addAction(action)
-        self.presentViewController(alert, animated:true){}
-    }
-    
+  
     
 
 }
