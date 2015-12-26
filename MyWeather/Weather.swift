@@ -31,6 +31,9 @@ class Weather {
     }
     
     var city:String {
+        if _city == nil {
+            _city = "Aargh!"
+        }
         return _city
     }
 

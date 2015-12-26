@@ -33,7 +33,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
        
         weather = Weather(latitude: latitude, longitude: longitude)
         weather.downloadWeather(latitude, longitude: longitude)
-       
+        
+        print(weather.city)
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
