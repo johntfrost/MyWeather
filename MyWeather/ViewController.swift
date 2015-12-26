@@ -17,13 +17,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var manager: CLLocationManager!
     var location: Location!
     
-    
     var latitude:String = ""
     var longitude:String = ""
     
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,11 +34,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         weather = Weather(latitude: latitude, longitude: longitude)
         weather.downloadWeather(latitude, longitude: longitude)
        
-        
     }
     
-  
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        let alert = UIAlertController(title: "Failed to find user's location.", message: "Please try again later", preferredStyle: .Alert)
+        let action = (UIAlertAction(title: "OK", style: .Default) { _ in})
+        alert.addAction(action)
+        self.presentViewController(alert, animated:true){}
+    }
     
-
+    
 }
 

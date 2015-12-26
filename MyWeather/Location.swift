@@ -37,11 +37,11 @@ class Location: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        let alert = UIAlertController(title: "Failed to find user's location.", message: "Please try again later", preferredStyle: .Alert)
-        let action = (UIAlertAction(title: "OK", style: .Default) { _ in})
-        alert.addAction(action)
-        self.presentViewController(alert, animated:true){}
-    }
+//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+//        let alert = UIAlertController(title: "Failed to find user's location.", message: "Please try again later", preferredStyle: .Alert)
+//        let action = (UIAlertAction(title: "OK", style: .Default) { _ in})
+//        alert.addAction(action)
+//        self.presentViewController(alert, animated:true){}
+//    }
     
 }

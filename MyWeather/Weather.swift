@@ -16,14 +16,22 @@ class Weather {
     private var _latitude:String!
     private var _longitude:String!
     private var _locationUrl:String!
-    private var _temp:Double!
+    private var _city:String!
+    private var _cnt:AnyObject!
     
     var latitude:String{
         return _latitude
     }
-    
     var longitude:String {
         return _longitude
+    }
+    
+    var cnt:AnyObject {
+        return _cnt
+    }
+    
+    var city:String {
+        return _city
     }
 
     
@@ -45,7 +53,21 @@ class Weather {
                     let json = try NSJSONSerialization.JSONObjectWithData(responseData, options: NSJSONReadingOptions.AllowFragments)
                     if let dict  = json as? Dictionary<String, AnyObject> {
                         
-                        print(dict)
+                        //print(dict)
+                        
+                        if let cnt = dict["cnt"] as? Int{
+                            self._cnt = cnt
+                            print(cnt)
+                        } else {
+                            print("Cnt Not Found")
+                        }
+                        
+                        if let city = dict["city"]!["name"] as? String {
+                            self._city = city
+                            print(city)
+                        }else {
+                            print("City not Found")
+                        }
                         
                     }
                 } catch {
