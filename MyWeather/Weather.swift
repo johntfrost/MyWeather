@@ -74,6 +74,9 @@ class Weather {
     }
     
     var rain:Double{
+        if _rain == nil {
+            _rain = 0
+        }
         return _rain
     }
     

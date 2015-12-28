@@ -42,6 +42,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     func updateUI() {
+        
         print(weather.cityName)
         print(weather.temp)
         print(weather.pressure)
@@ -56,10 +57,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         print(weather.dateTime)
         
         
-        locationLbl.text = weather.cityName
-        print(locationLbl.text)
-//
-//        weatherIcon.image = UIImage(named: weather.icon)
+        dispatch_async(dispatch_get_main_queue(),{
+            self.locationLbl.text = self.weather.cityName
+            self.weatherIcon.image = UIImage(named: self.weather.icon)
+        })
+        
         
     }
     
