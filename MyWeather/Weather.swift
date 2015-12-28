@@ -17,25 +17,48 @@ class Weather {
     private var _longitude:String!
     private var _locationUrl:String!
     private var _cityName:String!
-    private var _cnt:AnyObject!
+    private var _temp:Double!
+    private var _pressure:Double!
+    private var _humidity:Int!
+    
+    
     
     var latitude:String{
         return _latitude
-    }
+        }
     var longitude:String {
         return _longitude
-    }
-    
-    var cnt:AnyObject {
-        return _cnt
-    }
+        }
     
     var cityName:String {
         if _cityName == nil {
             _cityName = "Aargh!"
         }
         return _cityName
+        }
+    
+    var temp:Double{
+        if _temp == nil{
+            print("Temp Failed")
+        }
+        return _temp
+        }
+    
+    var pressure:Double{
+        if _pressure == nil{
+            print("Pressure Failed")
+        }
+        return _pressure
     }
+    
+    var humidity:Int{
+        if _humidity == nil{
+            print("Humididty Failed")
+        }
+        return _humidity
+    }
+
+    
 
     
     init(latitude:String, longitude:String){
@@ -54,30 +77,35 @@ class Weather {
             if let responseData = data {
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(responseData, options: NSJSONReadingOptions.AllowFragments)
-                    if let dict  = json as? Dictionary<String, AnyObject> {
+                    if let weatherData  = json as? Dictionary<String, AnyObject> {
                         
-                        //print(dict)
+                        //print(weatherData)
                         
-                        if let cnt = dict["cnt"] as? Int{
-                            self._cnt = cnt
-                            
-                        } else {
-                            print("Cnt Not Found")
-                        }
-                        
-                        if let city = dict["city"] as? Dictionary<String, AnyObject> {
+                        if let city = weatherData["city"] as? Dictionary<String, AnyObject> {
                             if let name = city["name"] as? String{
                             self._cityName = name
-                            }else {
-                                print("Name not found")
-                            }
-                            
-                        }else {
-                            print("City not Found")
                             }
                         }
                         
-                        completed()
+                        if let list = weatherData["list"]![0] as? Dictionary<String, AnyObject> {
+                            if let main = list["main"] as? Dictionary<String, AnyObject>{
+                                if let temp = main["temp"] as? Double{
+                                    self._temp = temp
+                                }
+                                if let pressure = main["pressure"] as? Double{
+                                    self._pressure = pressure
+                                }
+                                
+                                if let humidity = main["humidity"] as? Int{
+                                    self._humidity = humidity
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+                        
+                    completed()
                         
                 } catch {
                     print("Request Failed")
@@ -86,4 +114,5 @@ class Weather {
             
             }.resume()
     }
+
 }
