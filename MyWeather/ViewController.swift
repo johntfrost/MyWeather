@@ -34,10 +34,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         weather = Weather(latitude: latitude, longitude: longitude)
         weather.downloadWeather(latitude, longitude: longitude) { () -> () in
         
-        print(self.weather.cityName)
-        print(self.weather.temp)
-        print(self.weather.pressure)
-        print(self.weather.humidity)
+            print(self.weather.cityName)
+            print(self.weather.temp)
+            print(self.weather.pressure)
+            print(self.weather.humidity)
+            print(self.weather.weather1)
+            print(self.weather.weather2)
+            print(self.weather.cloudCover)
+            print(self.weather.windSpeed)
+            print(self.weather.windDir)
+            print(self.weather.rain)
+            print(self.weather.dateTime)
             
         }
     }

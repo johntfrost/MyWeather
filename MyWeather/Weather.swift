@@ -20,9 +20,16 @@ class Weather {
     private var _temp:Double!
     private var _pressure:Double!
     private var _humidity:Int!
+    private var _weather1:String!
+    private var _weather2:String!
+    private var _cloudCover:Int!
+    private var _windSpeed:Double!
+    private var _windDir:Double!
+    private var _rain:Double!
+    private var _dateTime:String!
     
     
-    
+
     var latitude:String{
         return _latitude
         }
@@ -31,32 +38,48 @@ class Weather {
         }
     
     var cityName:String {
-        if _cityName == nil {
-            _cityName = "Aargh!"
-        }
         return _cityName
         }
     
     var temp:Double{
-        if _temp == nil{
-            print("Temp Failed")
-        }
         return _temp
         }
     
     var pressure:Double{
-        if _pressure == nil{
-            print("Pressure Failed")
-        }
         return _pressure
     }
     
     var humidity:Int{
-        if _humidity == nil{
-            print("Humididty Failed")
-        }
         return _humidity
     }
+    var weather1:String{
+        return _weather1
+    }
+    var weather2:String{
+        return _weather2
+    }
+    
+    var cloudCover:Int{
+        return _cloudCover
+    }
+    
+    var windSpeed:Double{
+        return _windSpeed
+    }
+    
+    var windDir:Double{
+        return _windDir
+    }
+    
+    var rain:Double{
+        return _rain
+    }
+    var dateTime:String{
+        return _dateTime
+    }
+    
+    
+
 
     
 
@@ -88,6 +111,7 @@ class Weather {
                         }
                         
                         if let list = weatherData["list"]![0] as? Dictionary<String, AnyObject> {
+                            
                             if let main = list["main"] as? Dictionary<String, AnyObject>{
                                 if let temp = main["temp"] as? Double{
                                     self._temp = temp
@@ -100,9 +124,45 @@ class Weather {
                                     self._humidity = humidity
                                 }
                             }
+                            
+                            if let weatherArr = list["weather"]![0] as? Dictionary<String, AnyObject> {
+                    
+                                if let weather1 = weatherArr["main"] as? String{
+                                    self._weather1 = weather1
+                                }
+                                
+                                if let weather2 = weatherArr["description"] as? String{
+                                    self._weather2 = weather2
+                                }
+                            }
+                            
+                            if let clouds = list["clouds"] as? Dictionary<String, Int>{
+                                if let cloudCover = clouds["all"]{
+                                    self._cloudCover = cloudCover
+                                }
+                            }
+                            
+                            if let wind = list["wind"] as? Dictionary<String, AnyObject>{
+                                if let windSpeed = wind["speed"] as? Double{
+                                    self._windSpeed = windSpeed
+                                }
+                                
+                                if let windDir = wind["deg"] as? Double {
+                                    self._windDir = windDir
+                                }
+                            }
+                            
+                            if let rainData = list["rain"] as? Dictionary<String, AnyObject>{
+                                if let rain = rainData["3h"] as? Double {
+                                    self._rain = rain
+                                }
+                            }
+                            
+                            if let dateTime = list["dt_txt"] as? String{
+                                self._dateTime = dateTime
+                            }
+                            
                         }
-                        
-                        
                     }
                         
                     completed()
