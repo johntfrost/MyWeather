@@ -16,7 +16,7 @@ class Weather {
     private var _latitude:String!
     private var _longitude:String!
     private var _locationUrl:String!
-    private var _city:String!
+    private var _cityName:String!
     private var _cnt:AnyObject!
     
     var latitude:String{
@@ -30,11 +30,11 @@ class Weather {
         return _cnt
     }
     
-    var city:String {
-        if _city == nil {
-            _city = "Aargh!"
+    var cityName:String {
+        if _cityName == nil {
+            _cityName = "Aargh!"
         }
-        return _city
+        return _cityName
     }
 
     
@@ -46,7 +46,7 @@ class Weather {
         
     }
     
-    func downloadWeather(latitude:String,longitude:String){
+    func downloadWeather(latitude:String,longitude:String, completed: DownloadComplete){
         let session = NSURLSession.sharedSession()
         let url = NSURL(string: self._locationUrl)!
         
@@ -60,19 +60,25 @@ class Weather {
                         
                         if let cnt = dict["cnt"] as? Int{
                             self._cnt = cnt
-                            print(cnt)
+                            
                         } else {
                             print("Cnt Not Found")
                         }
                         
-                        if let city = dict["city"]!["name"] as? String {
-                            self._city = city
-                            print(city)
+                        if let city = dict["city"] as? Dictionary<String, AnyObject> {
+                            if let name = city["name"] as? String{
+                            self._cityName = name
+                            }else {
+                                print("Name not found")
+                            }
+                            
                         }else {
                             print("City not Found")
+                            }
                         }
                         
-                    }
+                        completed()
+                        
                 } catch {
                     print("Request Failed")
                 }

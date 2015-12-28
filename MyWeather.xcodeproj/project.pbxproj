@@ -14,6 +14,7 @@
 		203D0EF01C2C629700CCD5D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 203D0EEE1C2C629700CCD5D6 /* LaunchScreen.storyboard */; };
 		203D0EF91C2C633500CCD5D6 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203D0EF81C2C633500CCD5D6 /* Weather.swift */; };
 		203D0EFF1C2C9C8700CCD5D6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203D0EFE1C2C9C8700CCD5D6 /* Location.swift */; };
+		204775321C314A6C00598B8A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204775311C314A6C00598B8A /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		203D0EF11C2C629700CCD5D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		203D0EF81C2C633500CCD5D6 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		203D0EFE1C2C9C8700CCD5D6 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		204775311C314A6C00598B8A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				203D0EE91C2C629700CCD5D6 /* Main.storyboard */,
 				203D0EEC1C2C629700CCD5D6 /* Assets.xcassets */,
 				203D0EEE1C2C629700CCD5D6 /* LaunchScreen.storyboard */,
+				204775311C314A6C00598B8A /* Constants.swift */,
 				203D0EF11C2C629700CCD5D6 /* Info.plist */,
 			);
 			path = MyWeather;
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				204775321C314A6C00598B8A /* Constants.swift in Sources */,
 				203D0EE81C2C629700CCD5D6 /* ViewController.swift in Sources */,
 				203D0EF91C2C633500CCD5D6 /* Weather.swift in Sources */,
 				203D0EFF1C2C9C8700CCD5D6 /* Location.swift in Sources */,
