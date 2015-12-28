@@ -13,10 +13,12 @@ import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    @IBOutlet weak var weatherIcon: UIImageView!
+    @IBOutlet weak var locationLbl: UILabel!
+    
     var weather: Weather!
     var manager: CLLocationManager!
     var location: Location!
-    
     var latitude:String = ""
     var longitude:String = ""
     
@@ -33,20 +35,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
        
         weather = Weather(latitude: latitude, longitude: longitude)
         weather.downloadWeather(latitude, longitude: longitude) { () -> () in
-        
-            print(self.weather.cityName)
-            print(self.weather.temp)
-            print(self.weather.pressure)
-            print(self.weather.humidity)
-            print(self.weather.weather1)
-            print(self.weather.weather2)
-            print(self.weather.cloudCover)
-            print(self.weather.windSpeed)
-            print(self.weather.windDir)
-            print(self.weather.rain)
-            print(self.weather.dateTime)
             
+            
+            self.updateUI()
         }
+    }
+    
+    func updateUI() {
+        print(weather.cityName)
+        print(weather.temp)
+        print(weather.pressure)
+        print(weather.humidity)
+        print(weather.weather1)
+        print(weather.weather2)
+        print(weather.icon)
+        print(weather.cloudCover)
+        print(weather.windSpeed)
+        print(weather.windDir)
+        print(weather.rain)
+        print(weather.dateTime)
+        
+        
+        locationLbl.text = weather.cityName
+        print(locationLbl.text)
+//
+//        weatherIcon.image = UIImage(named: weather.icon)
+        
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
@@ -57,5 +71,5 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
     
+    
 }
-

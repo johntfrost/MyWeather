@@ -60,6 +60,7 @@
 		203D0EE41C2C629700CCD5D6 /* MyWeather */ = {
 			isa = PBXGroup;
 			children = (
+				204775351C318F0300598B8A /* View */,
 				203D0EF71C2C630300CCD5D6 /* Model */,
 				203D0EE51C2C629700CCD5D6 /* AppDelegate.swift */,
 				203D0EE71C2C629700CCD5D6 /* ViewController.swift */,
@@ -79,6 +80,13 @@
 				203D0EFE1C2C9C8700CCD5D6 /* Location.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		204775351C318F0300598B8A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

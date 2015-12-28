@@ -12,21 +12,23 @@ class Weather {
     
     let APP_ID = "971fe1f014c02772e6fc927c07b46aa9"
     let URL_BASE = "http://api.openweathermap.org/data/2.5/forecast?"
+    let IMP = "&units=imperial"
     
     private var _latitude:String!
     private var _longitude:String!
     private var _locationUrl:String!
     private var _cityName:String!
-    private var _temp:Double!
-    private var _pressure:Double!
-    private var _humidity:Int!
+    private var _temp:Double!           //Farenheight
+    private var _pressure:Double!       //hPa
+    private var _humidity:Int!          // %
     private var _weather1:String!
     private var _weather2:String!
-    private var _cloudCover:Int!
-    private var _windSpeed:Double!
-    private var _windDir:Double!
-    private var _rain:Double!
+    private var _cloudCover:Int!        // %
+    private var _windSpeed:Double!      //miles/hour
+    private var _windDir:Double!        //degrees
+    private var _rain:Double!           //converted to inches from MM
     private var _dateTime:String!
+    private var _icon:String!
     
     
 
@@ -74,9 +76,15 @@ class Weather {
     var rain:Double{
         return _rain
     }
+    
     var dateTime:String{
         return _dateTime
     }
+    
+    var icon:String{
+        return _icon
+    }
+    
     
     
 
@@ -88,7 +96,7 @@ class Weather {
         self._latitude = latitude
         self._longitude = longitude
         
-        _locationUrl = "\(URL_BASE)lat=\(self._latitude)&lon=\(self._longitude)&appid=\(APP_ID)"
+        _locationUrl = "\(URL_BASE)lat=\(self._latitude)&lon=\(self._longitude)\(IMP)&appid=\(APP_ID)"
         
     }
     
@@ -134,6 +142,10 @@ class Weather {
                                 if let weather2 = weatherArr["description"] as? String{
                                     self._weather2 = weather2
                                 }
+                                
+                                if let icon = weatherArr["icon"] as? String {
+                                    self._icon = icon
+                                }
                             }
                             
                             if let clouds = list["clouds"] as? Dictionary<String, Int>{
@@ -154,7 +166,7 @@ class Weather {
                             
                             if let rainData = list["rain"] as? Dictionary<String, AnyObject>{
                                 if let rain = rainData["3h"] as? Double {
-                                    self._rain = rain
+                                    self._rain = rain * 0.039
                                 }
                             }
                             
