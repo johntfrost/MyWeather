@@ -11,7 +11,7 @@ import Foundation
 class Weather {
     
     let APP_ID = "971fe1f014c02772e6fc927c07b46aa9"
-    let URL_BASE = "http://api.openweathermap.org/data/2.5/forecast?"
+    let URL_BASE = "http://api.openweathermap.org/data/2.5/weather?"
     let IMP = "&units=imperial"
     
     private var _latitude:String!
@@ -27,49 +27,82 @@ class Weather {
     private var _windSpeed:Double!      //miles/hour
     private var _windDir:Double!        //degrees
     private var _rain:Double!           //converted to inches from MM
-    private var _dateTime:String!
+    private var _dateTime:Double!
     private var _icon:String!
     
     
 
     var latitude:String{
+        if _latitude == nil{
+            _latitude = ""
+        }
         return _latitude
         }
     var longitude:String {
+        if _longitude == nil{
+            _longitude = ""
+        }
         return _longitude
         }
     
     var cityName:String {
+        if _cityName == nil {
+            _cityName = ""
+        }
         return _cityName
         }
     
     var temp:Double{
+        if _temp == nil {
+            _temp = 0
+        }
         return _temp
         }
     
     var pressure:Double{
+        if _pressure == nil{
+            _pressure = 0
+        }
         return _pressure
     }
     
     var humidity:Int{
+        if _pressure == nil{
+            _pressure = 0
+        }
         return _humidity
     }
     var weather1:String{
+        if _weather1 == nil{
+            _weather1 = ""
+        }
         return _weather1
     }
     var weather2:String{
+        if _weather2 == nil{
+            _weather2 = ""
+        }
         return _weather2
     }
     
     var cloudCover:Int{
+        if _cloudCover == nil{
+            _cloudCover = 0
+        }
         return _cloudCover
     }
     
     var windSpeed:Double{
+        if _windSpeed == nil{
+            _windSpeed = 0
+        }
         return _windSpeed
     }
     
     var windDir:Double{
+        if _windDir == nil{
+            _windDir = 0
+        }
         return _windDir
     }
     
@@ -80,7 +113,7 @@ class Weather {
         return _rain
     }
     
-    var dateTime:String{
+    var dateTime:Double{
         return _dateTime
     }
     
@@ -115,15 +148,13 @@ class Weather {
                         
                         //print(weatherData)
                         
-                        if let city = weatherData["city"] as? Dictionary<String, AnyObject> {
-                            if let name = city["name"] as? String{
-                            self._cityName = name
-                            }
+                        if let city = weatherData["name"] as? String {
+                            self._cityName = city
+                            
                         }
                         
-                        if let list = weatherData["list"]![0] as? Dictionary<String, AnyObject> {
-                            
-                            if let main = list["main"] as? Dictionary<String, AnyObject>{
+                        
+                            if let main = weatherData["main"] as? Dictionary<String, AnyObject>{
                                 if let temp = main["temp"] as? Double{
                                     self._temp = temp
                                 }
@@ -136,7 +167,7 @@ class Weather {
                                 }
                             }
                             
-                            if let weatherArr = list["weather"]![0] as? Dictionary<String, AnyObject> {
+                            if let weatherArr = weatherData["weather"]![0] as? Dictionary<String, AnyObject> {
                     
                                 if let weather1 = weatherArr["main"] as? String{
                                     self._weather1 = weather1
@@ -151,13 +182,13 @@ class Weather {
                                 }
                             }
                             
-                            if let clouds = list["clouds"] as? Dictionary<String, Int>{
+                            if let clouds = weatherData["clouds"] as? Dictionary<String, Int>{
                                 if let cloudCover = clouds["all"]{
                                     self._cloudCover = cloudCover
                                 }
                             }
                             
-                            if let wind = list["wind"] as? Dictionary<String, AnyObject>{
+                            if let wind = weatherData["wind"] as? Dictionary<String, AnyObject>{
                                 if let windSpeed = wind["speed"] as? Double{
                                     self._windSpeed = windSpeed
                                 }
@@ -167,17 +198,17 @@ class Weather {
                                 }
                             }
                             
-                            if let rainData = list["rain"] as? Dictionary<String, AnyObject>{
+                            if let rainData = weatherData["rain"] as? Dictionary<String, AnyObject>{
                                 if let rain = rainData["3h"] as? Double {
                                     self._rain = rain * 0.039
                                 }
                             }
                             
-                            if let dateTime = list["dt_txt"] as? String{
+                            if let dateTime = weatherData["dt"] as? Double{
                                 self._dateTime = dateTime
                             }
                             
-                        }
+                        
                     }
                         
                     completed()
