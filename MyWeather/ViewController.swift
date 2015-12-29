@@ -78,8 +78,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             self.weather2Lbl.text = self.weather.weather2.capitalizedString
             self.pressureLbl.text = "\(self.weather.pressure) hPa"
             self.humidityLbl.text = "\(self.weather.humidity) %"
-            self.windSpeedLbl.text = "\(self.weather.windSpeed) mph"
-            self.windDirLbl.text = "\(self.weather.windDir) deg"
+            self.windSpeedLbl.text = "\(Int(self.weather.windSpeed)) mph"
+            self.windDirLbl.text = "\(Int(self.weather.windDir)) deg"
             self.rainLbl.text = "\(self.weather.rain) inches"
             
             let date = NSDate(timeIntervalSince1970: self.weather.dateTime)
